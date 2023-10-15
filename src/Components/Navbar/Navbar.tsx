@@ -26,6 +26,12 @@ const Navbar = (props: Props) => {
           >
             Login
           </Link>
+          <Link
+             to="/signup"
+            className="hover:text-darkBlue"
+          >
+            Signup
+          </Link>
         </div>
       </div>
     </nav>
