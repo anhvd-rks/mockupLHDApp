@@ -56,8 +56,6 @@ const Login = (props: Props) => {
       setError("Wrong email or password! Try again")
     }
     e.preventDefault();
-    
-    
   }
 
   return (
