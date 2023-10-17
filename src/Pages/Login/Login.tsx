@@ -1,8 +1,11 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { login } from "../../Components/features/userSlice";
 import "./Login.css";
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import * as helpers from '../HomePage/helper'
 
 type Props = {};
 
@@ -37,9 +40,17 @@ const Login = (props: Props) => {
 ]
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
+
+  const navigateDashBoard = helpers.debounce(() => {
+    navigate('/', {replace: true})
+  }, 1000)
+
+  const navigateDashBoardHistory = () => {
+    navigate('/', {replace: true})
+  }
 
   const handleSubmit = (e: any) => {
     let submit = {
@@ -53,13 +64,42 @@ const Login = (props: Props) => {
         username: userList.filter((o) => o.email === submit.email && o.password === submit.password)[0]?.username,
         loggedIn: true,
       }))
-      navigate('/', {replace: true})
+      const userHistoryPass = {
+        email: email,
+        password: password,
+        username: userList.filter((o) => o.email === submit.email && o.password === submit.password)[0]?.username,
+        loggedIn: true,
+      }
+      localStorage.setItem('access', JSON.stringify(userHistoryPass));
+      toast.success('Login Successful, moving you to dashboard...')
+      navigateDashBoard()
     }
     else{
       setError("Wrong email or password! Try again")
     }
     e.preventDefault();
   }
+
+  useEffect(() => {
+    try{
+      let checkHis = JSON.parse(localStorage.getItem('access') || '{ }') || ''
+      if(Object.keys(checkHis).length !== 0){
+        dispatch(login({
+          email: checkHis.email,
+          password: checkHis.password,
+          username: checkHis.username,
+          loggedIn: checkHis.loggedIn,
+        }))
+        navigateDashBoardHistory()
+      }
+      else{
+        console.log("history is empty")
+      }
+    } catch (e){
+      console.log(e)
+    }
+    
+  },[] )
 
   return (
     <>
@@ -117,6 +157,17 @@ const Login = (props: Props) => {
             </form>
           </div>
         </div>
+        <ToastContainer 
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeButton={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"/>
       </div>
     </>
   );

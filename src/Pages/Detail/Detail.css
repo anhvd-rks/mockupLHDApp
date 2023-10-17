@@ -4,4 +4,20 @@
 }
 .detail-content{
     margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.left{
+    /* background-color: #dce7f8; 
+    width: 40%; */
+    position: relative;
+}
+.more-button{
+    position: absolute;
+    bottom: 40px;
+    left: 35px;
+}
+.right{
+    /* background-color: #586e8d;
+    width: 55%; */
 }

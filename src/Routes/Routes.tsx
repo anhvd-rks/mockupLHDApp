@@ -1,5 +1,4 @@
-import { Outlet, createBrowserRouter } from "react-router-dom";
-import App from "../App";
+import { Outlet } from "react-router-dom";
 import HomePage from "../Pages/HomePage/HomePage";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
@@ -22,9 +21,10 @@ const NavbarLayout = () => {
 }
 
 export const AppRouter = () => {
+  const accessAll = localStorage.getItem('access') || '{ }'
   const access = useSelector(selectUser)
   useEffect(()=>{
-    //console.log(access?.loggedIn)
+    //console.log(access?.loggedIn, JSON.parse(accessAll), Object.keys(JSON.parse(accessAll)).length)
   },[access])
     return (
         <BrowserRouter>
