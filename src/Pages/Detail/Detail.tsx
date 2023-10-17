@@ -12,9 +12,12 @@ const Detail = (props: Detail) => {
     const data = location.state;
     console.log(data, location);
     return (
-        <div className="detail-content">
-            
+        <div className="page">
+            <div className="detail-content">
+                <h1>Detail</h1>
+            </div>
         </div>
+      
     )
 }
 

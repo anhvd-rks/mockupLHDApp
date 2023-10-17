@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { router } from './Routes/Routes';
+// import { router } from './Routes/Routes';
 import { RouterProvider } from 'react-router-dom';
 import { store } from './store';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
+import { selectUser } from './Components/features/userSlice';
+import App from './App';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,7 +15,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      {/* <RouterProvider router={router}/> */}
+      <App />
     </Provider>
   </React.StrictMode>
 );

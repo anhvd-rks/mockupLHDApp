@@ -2,11 +2,12 @@ import React, {useState} from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { login } from "../../Components/features/userSlice";
 import "./Login.css";
+import { useNavigate } from 'react-router-dom';
 
 type Props = {};
 
 const Login = (props: Props) => {
-
+  const navigate = useNavigate();
   const userList = [
     {
       username: "avd12345",
@@ -49,8 +50,10 @@ const Login = (props: Props) => {
       dispatch(login({
         email: email,
         password: password,
+        username: userList.filter((o) => o.email === submit.email && o.password === submit.password)[0]?.username,
         loggedIn: true,
       }))
+      navigate('/', {replace: true})
     }
     else{
       setError("Wrong email or password! Try again")
