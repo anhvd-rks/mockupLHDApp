@@ -11,17 +11,21 @@ interface CardItem {
     time: string
     total: any
     pos: number
+    at: number
+    page: number
 }
 
 const Card = (props: CardItem) => {
-    const path = '/detail/' + props.pos
+    const path = '/detail/' + (props.pos)
     const detailData = props.total
     return (
         <div className="card-content">
             <div className="flex min-w-0 gap-x-4">
               <img className="h-20 w-20 flex-none rounded-full bg-gray-50" src={props.image} alt=""/>
               <div className="min-w-0 flex-auto">
-                <p className="text-sm font-semibold leading-6 text-gray-900">{props.name}</p>
+                <Link to={path} state={detailData}>
+                  <p className="text-sm font-semibold leading-6 text-gray-900">{props.name} {props.at+1 + (props.page*20-20)}</p>
+                </Link>
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">{props.gender}</p>
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">{props.status}</p>
               </div>
