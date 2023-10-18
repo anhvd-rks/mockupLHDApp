@@ -37,7 +37,7 @@ After npm i command finished running, start the server in your local computer wi
 Use command in order to run written test cases
 
 ```bash
-    npm test to 
+    npm test
 ```
 
 Author: Anh Vu - 2023
