@@ -85,6 +85,7 @@ const HomePage = (props: Props) => {
   return (
     <>
     <div className="page">
+      <h1 style={{color: '#0f172a', textAlign: 'center', marginBottom: '50px', fontSize: '32px'}}>CHARACTERS R&M</h1>
       <div className="filter">
         <form className="group relative">
           <svg 
@@ -146,14 +147,15 @@ const HomePage = (props: Props) => {
               </button>
             </li>
             <li>
-              <button  aria-current="page" 
+              <p  aria-current="page" id="page"
               className="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
               >
                 {page}
-              </button>
+              </p>
             </li>
             <li>
               <button
+              id="next"
               onClick={
                 (e) => {if(page !== total ){
                 setPage((v)=> v+1)

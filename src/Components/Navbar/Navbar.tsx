@@ -5,7 +5,7 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { selectUser, logout } from "../features/userSlice";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux/es/exports";
+import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import * as helpers from "../../Pages/HomePage/helper";
 
@@ -23,7 +23,7 @@ const Navbar = (props: Props) => {
   }, 200)
 
   return (
-    <nav className="relative container mx-auto p-6" style={{maxWidth: '90%'}}>
+    <nav className="relative container mx-auto p-6" style={{maxWidth: '90%'}} id="navbarLanding">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-20">
             <Link to = "/">
@@ -58,6 +58,7 @@ const Navbar = (props: Props) => {
           </button>
           :
           <Link
+              id="#signupNav"
              to="/signup"
             className="hover:text-darkBlue"
           >

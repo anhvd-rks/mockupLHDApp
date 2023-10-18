@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { useDispatch } from "react-redux/es/exports";
+import { useDispatch } from "react-redux";
 import { login } from "../../Components/features/userSlice";
 import "./Login.css";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import * as helpers from '../HomePage/helper'
 
-type Props = {};
+export interface Props {
+}
 
 const Login = (props: Props) => {
   const navigate = useNavigate();
