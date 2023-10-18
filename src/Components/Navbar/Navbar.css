@@ -1,0 +1,37 @@
+@media (max-width: 1050px) {
+    .rightSide{
+        display: flex;
+    }
+}
+@media (max-width: 700px) {
+    .rightSide{
+        display: block;
+    }
+    .leftSide{
+        display: block;
+    }
+    .dashboard-container{
+        margin: 20px 0px 0px 0px!important
+    }
+    .btnSignout{
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .navTop{
+        max-width: 100%!important
+    }
+    .rightSide{
+        display: block;
+    }
+    .leftSide{
+        display: block;
+    }
+    .dashboard-container{
+        margin: 20px 0px 0px 0px!important
+    }
+    .btnSignout{
+        margin-top: 20px;
+    }
+}

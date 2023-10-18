@@ -3,3 +3,14 @@
     justify-content: space-between;
     width: 100%;
 }
+.infoButton{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.textName{
+    max-width: 120px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

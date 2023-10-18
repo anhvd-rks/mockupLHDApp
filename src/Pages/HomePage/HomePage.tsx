@@ -84,34 +84,32 @@ const HomePage = (props: Props) => {
 
   return (
     <>
-    <div className="page">
+    <div className="pageHome">
       <h1 style={{color: '#0f172a', textAlign: 'center', marginBottom: '50px', fontSize: '32px'}}>CHARACTERS R&M</h1>
       <div className="filter">
-        <form className="group relative">
+        <form className="group relative formSearch">
           <svg 
-          style={{zIndex: 1, marginTop: '0.375rem'}}
           width="20" height="20" fill="currentColor" 
-          className="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-blue-500" 
+          className="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-blue-500 iconSearch" 
           aria-hidden="true">
             <path fillRule="evenodd" clipRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
           </svg>
           <input 
-            style={{position: 'absolute', bottom: 0, paddingTop: '0.6rem'}}
-            className="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none searchBar text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm" 
-            type="text" aria-label="Filter name" 
+            className="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm searchBar search" 
+            type="text" aria-label="filterName"  data-testid="filterName"
             placeholder="Filter by name..."
             onChange={(e)=> handleSearch(e.target.value)}
           />
         </form>
-        <div className="">
+        <div className="filterBy">
           <Filter type="status" option={statusFilter} changeFilter={handleFilter}/>
         </div>
-        <div className="">
+        <div className="filterBy">
           <Filter type="gender"  option={genderFilter} changeFilter={handleFilter}/>
         </div>
       </div>
       <div className="page-content">
-        <ul role="list" className="divide-y divide-gray-100">
+        <ul className="divide-y divide-gray-100">
           {data?.length > 0 ? data.map((item, index) => {
             return(
               <li className="flex justify-between gap-x-6 py-5" key={index}>

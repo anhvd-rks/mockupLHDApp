@@ -3,7 +3,7 @@ import HomePage from "../Pages/HomePage/HomePage";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import Detail from "../Pages/Detail/Detail";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectUser } from "../Components/features/userSlice";
 import Navbar from "../Components/Navbar/Navbar";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
@@ -21,10 +21,8 @@ const NavbarLayout = () => {
 }
 
 export const AppRouter = () => {
-  const accessAll = localStorage.getItem('access') || '{ }'
   const access = useSelector(selectUser)
   useEffect(()=>{
-    //console.log(access?.loggedIn, JSON.parse(accessAll), Object.keys(JSON.parse(accessAll)).length)
   },[access])
     return (
         <BrowserRouter>

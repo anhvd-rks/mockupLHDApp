@@ -1,4 +1,4 @@
-.page{
+.pageHome{
     padding: 0 200px;
     margin-top: 100px;
     margin-bottom: 100px;
@@ -11,6 +11,17 @@
 .filter{
     display: flex;
     justify-content: space-between;
+}
+
+.search{
+    position: absolute;
+    bottom: 0;
+    padding-top: 0.6rem
+}
+
+.iconSearch{
+    z-index: 1;
+    margin-top: 0.375rem;
 }
 
 .filter-section{
@@ -30,3 +41,33 @@
     justify-content: center;
     display: flex;
 }
+
+@media (max-width: 1080px) {
+   .pageHome{
+        padding: 0 50px;
+        margin-top: 100px;
+        margin-bottom: 100px;
+   }
+}
+@media (max-width: 700px) {
+    .pageHome{
+         padding: 0 50px;
+         margin-top: 100px;
+         margin-bottom: 100px;
+    }
+    .filter{
+        display: block
+    }
+    .group{ 
+        width: 100%
+    }
+    .iconSearch{
+        margin-top: -0.625rem;
+    }
+    .search{
+        position: unset
+    }
+    .filterBy{
+        margin-top: 20px
+    }
+ }

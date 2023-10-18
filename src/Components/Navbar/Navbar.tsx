@@ -1,6 +1,5 @@
 import React from "react";
-import logo from "../../logo.svg"
-import logoRM from "./91MteSqsrJL._AC_UF1000,1000_QL80_.jpg"
+import logoRM from "./thumb.jpg"
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { selectUser, logout } from "../features/userSlice";
@@ -23,49 +22,35 @@ const Navbar = (props: Props) => {
   }, 200)
 
   return (
-    <nav className="relative container mx-auto p-6" style={{maxWidth: '90%'}} id="navbarLanding">
+    <nav className="relative container mx-auto p-6 navTop" style={{maxWidth: '90%'}} id="navbarLanding">
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-20">
+        <div className="flex items-center space-x-20 leftSide" >
             <Link to = "/">
-                <img src={logo} alt="" style={{width: 100, height: 50 }}/>
+                <img src={logoRM} alt="" style={{width: 100, height: 50 }} />
             </Link>
-          <div className="hidden font-bold lg:flex">
-            <Link to="/" className="text-black hover:text-darkBlue">
-              Dashboard
-            </Link>
-          </div>
+          {(access?.loggedIn || userHistory) && (
+            <div className="font-bold lg:flex dashboard-container">
+              <Link to="/" className="text-black hover:text-darkBlue">
+                Characters
+              </Link>
+            </div>
+          )}
         </div>
-        <div className="hidden lg:flex items-center space-x-6 text-back">
-          {access?.loggedIn || userHistory ? 
-            <div className="hidden lg:flex items-center space-x-6 text-back px-8 py-3 font-bold rounded text-white bg-lightGreen hover:opacity-70">
+        <div className=" lg:flex items-center space-x-6 text-back rightSide">
+          {(access?.loggedIn || userHistory) && (
+            <div className=" lg:flex items-center space-x-6 text-back px-8 py-3 font-bold rounded text-white bg-lightGreen hover:opacity-70">
               {access?.username} {userHistory}
-            </div> 
-            :
-            <Link
-              to="/login"
-              className="px-8 py-3 font-bold rounded text-white bg-lightGreen hover:opacity-70"
+            </div>
+          )}
+          {(access?.loggedIn || userHistory) && (
+            <button
+              onClick={handleSignOut}
+              className="hover:text-darkBlue btnSignout"
             >
-              Login
-            </Link>
+              Sign out
+            </button>
+          ) 
           }
-          {access?.loggedIn || userHistory
-          ? 
-          <button
-            onClick={handleSignOut}
-            className="hover:text-darkBlue"
-          >
-            Sign out
-          </button>
-          :
-          <Link
-              id="#signupNav"
-             to="/signup"
-            className="hover:text-darkBlue"
-          >
-            Sign up
-          </Link>
-          }
-          
         </div>
       </div>
     </nav>

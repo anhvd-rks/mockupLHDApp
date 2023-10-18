@@ -24,15 +24,15 @@ const Card = (props: CardItem) => {
               <img className="h-20 w-20 flex-none rounded-full bg-gray-50" src={props.image} alt=""/>
               <div className="min-w-0 flex-auto">
                 <Link to={path} state={detailData}>
-                  <p className="text-sm font-semibold leading-6 text-gray-900">{props.name} {props.at+1 + (props.page*20-20)}</p>
+                  <p className="text-sm font-semibold leading-6 text-gray-900 textName">{props.name} {props.at+1 + (props.page*20-20)}</p>
                 </Link>
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">{props.gender}</p>
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">{props.status}</p>
               </div>
             </div>
-            <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-              <p className="text-sm leading-6 text-gray-900">{props.species}</p>
-              <p className="mt-1 text-xs leading-5 text-gray-500">Created {(new Date(Date.parse(props.time))).toString().slice(0,25)}</p>
+            <div className=" shrink-0 sm:flex sm:flex-col sm:items-end infoButton">
+              {/* <p className="text-sm leading-6 text-gray-900">{props.species}</p>
+              <p className="mt-1 text-xs leading-5 text-gray-500">Created {(new Date(Date.parse(props.time))).toString().slice(0,25)}</p> */}
               <Link
               to={path}
               state={detailData}

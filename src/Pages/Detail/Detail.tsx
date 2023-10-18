@@ -53,28 +53,29 @@ const Detail = (props: DetailType) => {
     }, [])
 
     return (
-        <div className="page">
+        <div className="pageDetail">
+            <h1 className="titleDetail">ID CARD</h1>
             {detailData?.name ? (
             <div>
-                <button onClick={Back} className="hidden lg:flex items-center space-x-6 text-back px-8 py-3 font-bold rounded text-white hover:opacity-70" style={{backgroundColor: '#5d8ad7'}} >Back</button>
+                <button onClick={Back} className="lg:flex items-center space-x-6 text-back px-8 py-3 font-bold rounded text-white hover:opacity-70" style={{backgroundColor: '#5d8ad7'}} >Back</button>
                 <div className="detail-content bg-white overflow-hidden shadow rounded-lg border">
-                    <div><img src={detailData?.image} alt="ava" style={{width: 500}}/></div>
+                    <div className="imgContainer"><img src={detailData?.image} alt="ava" className="imgDetail"/></div>
                     <div className="left">
-                        <div style={{fontSize: 32, fontWeight: 700, textTransform: 'uppercase'}}>{detailData?.name}</div>
-                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <div className="nameRight">{detailData?.name}</div>
+                        <div style={{display: 'flex', justifyContent: 'space-between'}} className="field">
                             <div>Since:</div><div>{(new Date(Date.parse(detailData?.created))).toString().slice(0,15)}</div>
                         </div>
-                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                        <div>From:</div><div>{detailData?.name}</div>  
+                        <div style={{display: 'flex', justifyContent: 'space-between'}} className="field">
+                        <div>From:</div><div style={{textAlign: 'end'}}>{detailData?.location?.name}</div>  
                         </div>
-                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                            <div>Origin:</div><div>{detailData?.origin?.name}</div>
+                        <div style={{display: 'flex', justifyContent: 'space-between'}} className="field">
+                            <div>Origin:</div><div style={{textAlign: 'end'}}>{detailData?.origin?.name}</div>
                         </div>
-                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                            <div> Gender:</div><div>{detailData?.gender}</div>
+                        <div style={{display: 'flex', justifyContent: 'space-between'}} className="field">
+                            <div> Gender:</div><div style={{textAlign: 'end'}}>{detailData?.gender}</div>
                         </div>
-                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                            <div>Status:</div><div>{detailData?.status}</div>
+                        <div style={{display: 'flex', justifyContent: 'space-between'}} className="field">
+                            <div>Status:</div><div style={{textAlign: 'end'}}>{detailData?.status}</div>
                         </div>
                         <div style={{display: 'flex', justifyContent: 'center'}} className="more-button ">
                             <button className="text-indigo-700 border border-indigo-600 py-4 px-6 rounded inline-flex items-center" 
