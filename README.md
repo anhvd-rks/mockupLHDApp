@@ -40,4 +40,7 @@ Use command in order to run written test cases
     npm test
 ```
 
+From then you are in Login page, use this infos below to test
+email: avd123@gmail.com - password: 123456
+
 Author: Anh Vu - 2023
