@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
-import { AppRouter } from './Routes/Routes';
+import { router } from './Routes/Routes';
+import { RouterProvider } from 'react-router-dom';
 
 function App() {
   return (
-    <AppRouter />
+    <RouterProvider router={router} fallbackElement={<div>Loading...</div>}/>
   );
 }
 

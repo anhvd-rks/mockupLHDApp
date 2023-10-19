@@ -1,40 +1,18 @@
-import { Outlet } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import HomePage from "../Pages/HomePage/HomePage";
 import Login from "../Pages/Login/Login";
-import Signup from "../Pages/Signup/Signup";
 import Detail from "../Pages/Detail/Detail";
-import { useSelector } from 'react-redux';
-import { selectUser } from "../Components/features/userSlice";
-import Navbar from "../Components/Navbar/Navbar";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import { useEffect } from "react";
+import { Route } from "react-router-dom"
+import PrivateRoute from "./privateRoute";
 
-const NavbarLayout = () => {
-  return (
-    <div>
-        <Navbar />
-        <div>
-            <Outlet />
-        </div>
-    </div>
-)
-}
-
-export const AppRouter = () => {
-  const access = useSelector(selectUser)
-  useEffect(()=>{
-  },[access])
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route element={<NavbarLayout />} >
-                  <Route path='/' element={ access?.loggedIn ? <HomePage /> : <Navigate to='/login' replace />} />
-                  <Route path='/login' element={<Login />} />
-                  <Route path='/signup' element={<Signup />} />
-                  <Route path='/detail/:id' element={access?.loggedIn ? <Detail /> : <Navigate to='/login' replace />} />
-                  <Route path='*' element={<Navigate to='/login' replace />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    )
-}
+export const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="login" element={<Login/>}/>
+      <Route path="/" element={<PrivateRoute />}>
+        <Route index element={<HomePage />} />
+        <Route path="/detail/:id" element={<Detail/>}/>
+      </Route>
+    </>
+  )
+);
