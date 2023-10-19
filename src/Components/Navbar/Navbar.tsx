@@ -14,11 +14,11 @@ const Navbar = (props: Props) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const access = useSelector(selectUser)
-  const userHistory = localStorage.getItem('username') || ''
+  const userHistory =  localStorage.getItem("access") && JSON.parse(localStorage.getItem("access") || "")
   const handleSignOut = helpers.debounce(() => {
     dispatch(logout());
     localStorage.clear();
-    navigate('/signup', {replace: true})
+    navigate('/login', {replace: true})
   }, 200)
 
   return (
@@ -28,7 +28,7 @@ const Navbar = (props: Props) => {
             <Link to = "/">
                 <img src={logoRM} alt="" style={{width: 100, height: 50 }} />
             </Link>
-          {(access?.loggedIn || userHistory) && (
+          {(access?.loggedIn || (userHistory && userHistory.loggedIn)) && (
             <div className="font-bold lg:flex dashboard-container">
               <Link to="/" className="text-black hover:text-darkBlue">
                 Characters
@@ -37,12 +37,12 @@ const Navbar = (props: Props) => {
           )}
         </div>
         <div className=" lg:flex items-center space-x-6 text-back rightSide">
-          {(access?.loggedIn || userHistory) && (
+          {(access?.loggedIn || (userHistory && userHistory.loggedIn)) && (
             <div className=" lg:flex items-center space-x-6 text-back px-8 py-3 font-bold rounded text-white bg-lightGreen hover:opacity-70">
-              {access?.username} {userHistory}
+              {(userHistory && userHistory.loggedIn) && userHistory.username}
             </div>
           )}
-          {(access?.loggedIn || userHistory) && (
+          {(access?.loggedIn || (userHistory && userHistory.loggedIn)) && (
             <button
               data-testid="signout"
               onClick={handleSignOut}
