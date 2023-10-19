@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, getByTestId } from '@testing-library/react';
 import Login from '../Login';
 import {BrowserRouter as Router} from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { useDispatch } from 'react-redux';
 import { store } from '../../../store';
-
-const onChange = require('../Login')
+import { AppRouter } from '../../../Routes/Routes';
+import { getData } from '../../HomePage/util';
 
 
 test('renders Login', () => {
@@ -38,3 +41,26 @@ test('check change email password field in Login', () => {
     expect(warning).toHaveStyle('display: none')
 });
 
+test('check change email password field in Login', () => {
+    render(<Provider store={store}><Router><Login /></Router></Provider>);
+    const email = screen.getByTestId('email')
+    const password = screen.getByTestId('password')
+    userEvent.type(email, 'avd123@gmail.com')
+    userEvent.type(password, '123456')
+    expect(email).toHaveValue('avd123@gmail.com')
+    expect(password).toHaveValue('123456')
+    const button = screen.getByTestId('submit')
+    fireEvent.click(button)
+});
+
+test('navigate after click login', async() => {
+    render(<Provider store={store}><AppRouter /></Provider>)
+    const toListScreen = screen.getByText('CHARACTERS R&M')
+    expect(toListScreen).toBeInTheDocument()
+})
+
+test('navigate after click login', async() => {
+    render(<Provider store={store}><AppRouter /></Provider>)
+    const toListScreen = screen.getByText('CHARACTERS R&M')
+    expect(toListScreen).toBeInTheDocument()
+})

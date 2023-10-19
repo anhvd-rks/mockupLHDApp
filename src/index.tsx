@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 // import { router } from './Routes/Routes';
-import { RouterProvider } from 'react-router-dom';
 import { store } from './store';
-import { Provider, useSelector } from 'react-redux';
-import { selectUser } from './Components/features/userSlice';
+import { Provider } from 'react-redux';
 import App from './App';
 
 const root = ReactDOM.createRoot(

@@ -22,7 +22,7 @@ const Navbar = (props: Props) => {
   }, 200)
 
   return (
-    <nav className="relative container mx-auto p-6 navTop" style={{maxWidth: '90%'}} id="navbarLanding">
+    <nav className="relative container mx-auto p-6 navTop" style={{maxWidth: '90%'}} data-testid="navbar" id="navbarLanding">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-20 leftSide" >
             <Link to = "/">
@@ -44,6 +44,7 @@ const Navbar = (props: Props) => {
           )}
           {(access?.loggedIn || userHistory) && (
             <button
+              data-testid="signout"
               onClick={handleSignOut}
               className="hover:text-darkBlue btnSignout"
             >
