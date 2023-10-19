@@ -44,20 +44,25 @@ const HomePage = (props: Props) => {
     }
     else{
       setData([])
+      setTotal(1)
+      setPage(1)
     }
   }
 
   const handleFilter = (data: any) => {
     if(data?.type === 'gender'){  
       setGender(data.value)
+      setPage(1)
     }
     else{
       setStatus(data.value)
+      setPage(1)
     }
   }
 
   const handleSearch = helpers.debounce((data: any) => {
     setSearch(data)
+    setPage(1)
   }, 500)
 
   const handleClickFirst = () => {
@@ -155,11 +160,11 @@ const HomePage = (props: Props) => {
               <button
               id="next"
               onClick={
-                (e) => {if(page !== total ){
+                (e) => {if((page !== total) ){
                 setPage((v)=> v+1)
               }}
               }
-              style={{opacity: page === total ? "0.5" : "1"}}
+              style={{opacity: ((page === total) || data?.length === 0) ? "0.5" : "1"}}
               className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               >
                 Next
