@@ -1,66 +1,68 @@
 import React, {useState} from 'react';
-import { render, screen, fireEvent, getByTestId } from '@testing-library/react';
+import { render, screen, fireEvent, getByTestId, waitFor } from '@testing-library/react';
 import Login from '../Login';
 import {BrowserRouter as Router} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import { RouterProvider, createMemoryRouter } from "react-router";
 import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { useDispatch } from 'react-redux';
 import { store } from '../../../store';
-import { AppRouter } from '../../../Routes/Routes';
+import { router } from '../../../Routes/Routes';
 import { getData } from '../../HomePage/util';
 
+describe("Login page", () => {
+    it("submits email and password success", async () => {
+      const email = "avd123@gmail.com";
+      const password = "123456";
+      const router = createMemoryRouter(
+        [
+          {
+            path: "/",
+            element: <></>,
+          },
+          {
+            path: "/login",
+            element: <Login />,
+          },
+        ],
+        {
+          initialEntries: ["/login"],
+          initialIndex: 0,
+        }
+      );
+      render(<Provider store={store}><RouterProvider router={router} /></Provider>);
+      expect(router.state.location.pathname).toBe("/login");
+      await userEvent.type(screen.getByTestId('email'), email);
+      await userEvent.type(screen.getByTestId('password'), password);
+      await userEvent.click(screen.getByTestId('submit'));
+      const emailContainer = screen.getByTestId('email')
+      const passwordContainer = screen.getByTestId('password')
+      expect(emailContainer).toHaveValue('avd123@gmail.com')
+      expect(passwordContainer).toHaveValue('123456')
+    });
 
-test('renders Login', () => {
-    render(<Provider store={store}><Router><Login /></Router></Provider>);
-    const linkElement = screen.getByTestId('email');
-    expect(linkElement).toBeInTheDocument();
-    const button = screen.getByTestId('submit')
-    fireEvent.click(button)
-    expect(screen.getByTestId('errorText')).toBeInTheDocument()
-});
+    test('navigate after click login', async() => {
+        render(<Provider store={store}><RouterProvider router={router} /></Provider>)
+        const toListScreen = screen.getByText('CHARACTERS R&M')
+        expect(toListScreen).toBeInTheDocument()
+    })
 
-test('check submit button in Login', () => {
-    render(<Provider store={store}><Router><Login /></Router></Provider>);
-    const linkElement = screen.getByTestId('submit');
-    expect(linkElement).toBeInTheDocument();
-    const button = screen.getByTestId('submit')
-    const warning = screen.getByTestId('errorText')
-    fireEvent.click(button)
-    expect(warning).toHaveStyle('display: block')
-});
+    test('click signout', async() => {
+        render(<Provider store={store}><RouterProvider router={router} /></Provider>)
+        const toSignOut = screen.getByTestId('signout')
+        await userEvent.click(toSignOut);
+        await waitFor(() => expect(location.pathname).toBe('/login'))
+    })
 
-test('check change email password field in Login', () => {
-    render(<Provider store={store}><Router><Login /></Router></Provider>);
-    const mail = screen.getByTestId('password')
-    const pass = screen.getByTestId('email')
-    const warning = screen.getByTestId('errorText')
-    fireEvent.change(mail,{ target: { value: 'avd123@gmail.com' } })
-    fireEvent.change(pass,{ target: { value: '123456' } })
-    expect(warning).toHaveStyle('display: none')
-});
-
-test('check change email password field in Login', () => {
-    render(<Provider store={store}><Router><Login /></Router></Provider>);
-    const email = screen.getByTestId('email')
-    const password = screen.getByTestId('password')
-    userEvent.type(email, 'avd123@gmail.com')
-    userEvent.type(password, '123456')
-    expect(email).toHaveValue('avd123@gmail.com')
-    expect(password).toHaveValue('123456')
-    const button = screen.getByTestId('submit')
-    fireEvent.click(button)
-});
-
-test('navigate after click login', async() => {
-    render(<Provider store={store}><AppRouter /></Provider>)
-    const toListScreen = screen.getByText('CHARACTERS R&M')
-    expect(toListScreen).toBeInTheDocument()
-})
-
-test('navigate after click login', async() => {
-    render(<Provider store={store}><AppRouter /></Provider>)
-    const toListScreen = screen.getByText('CHARACTERS R&M')
-    expect(toListScreen).toBeInTheDocument()
-})
+    test('wrong password', async() => {
+        render(<Provider store={store}><RouterProvider router={router} /></Provider>)
+        const email = "avd123@gmail.com";
+        const password = "12345689";
+        await userEvent.type(screen.getByTestId('email'), email);
+        await userEvent.type(screen.getByTestId('password'), password);
+        await userEvent.click(screen.getByTestId('submit'));
+        expect(screen.getByTestId('errorText')).toHaveStyle('display: block')
+    })
+  }); 

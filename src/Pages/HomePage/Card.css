@@ -9,7 +9,7 @@
     display: flex;
 }
 .textName{
-    max-width: 120px;
+    max-width: 200px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
